@@ -1,0 +1,7 @@
+{
+  "name": "Rua’s Bakery",
+  "description": "E-commerce completo para Rua’s Bakery en Barranquilla con sistema de administración de productos, carrito de compras e integración con WhatsApp.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
