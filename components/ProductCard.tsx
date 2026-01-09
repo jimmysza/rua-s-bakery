@@ -1,6 +1,6 @@
 
+import { Info, Plus, ShoppingBasket } from 'lucide-react';
 import React from 'react';
-import { Plus, Info, ShoppingBasket } from 'lucide-react';
 import { Product } from '../types';
 
 interface ProductCardProps {
@@ -11,19 +11,20 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onShowDetails }) => {
   const isOutOfStock = product.stock <= 0;
+
   const mainImage = product.images?.[0] || 'https://images.unsplash.com/photo-1550617931-e17a7b70dce2?auto=format&fit=crop&q=80&w=800';
 
   return (
     <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group border border-gray-100 flex flex-col h-full relative">
       {isOutOfStock && (
         <div className="absolute top-4 left-4 z-10">
-          <span className="bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-tighter shadow-md">
-            Agotado
+          <span className="bg-orange-500 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-tighter shadow-md">
+            para Ordenar
           </span>
         </div>
       )}
 
-      <div className="relative overflow-hidden h-56">
+      <div className="relative overflow-hidden h-60">
         <img
           src={mainImage}
           alt={product.name}
@@ -32,7 +33,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onShowD
         />
         <div className="absolute top-4 right-4">
           <span className="bg-white/90 backdrop-blur-sm text-primary font-bold px-3 py-1 rounded-full shadow-sm text-sm">
-            ${product.price.toFixed(2)}
+            ${product.price.toLocaleString('es-CO')}
           </span>
         </div>
         <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-2">
@@ -54,7 +55,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onShowD
       </div>
 
       <div className="p-5 flex-grow flex flex-col">
-        
+
         <div className="flex justify-between items-start mb-1">
 
           <div className="text-xs font-semibold text-primary uppercase tracking-widest">
@@ -75,13 +76,17 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onShowD
         <div className="flex space-x-2">
           <button
             onClick={() => onAddToCart(product)}
-            disabled={isOutOfStock}
             className={`flex-grow flex items-center justify-center py-3 font-semibold rounded-xl transition-all duration-300 border ${isOutOfStock
-                ? 'bg-gray-100 text-gray-400 cursor-not-allowed border-gray-100'
-                : 'bg-primary-light text-primary hover:bg-primary hover:text-white border-primary-light shadow-sm'
+              ? 'bg-orange-500 text-white hover:bg-orange-600 border-orange-500 shadow-md'
+              : 'bg-primary-light text-primary hover:bg-primary hover:text-white border-primary-light shadow-sm'
               }`}
           >
-            {isOutOfStock ? 'Agotado' : (
+            {isOutOfStock ? (
+              <>
+                <Plus className="h-4 w-4 mr-2" />
+                Ordenar
+              </>
+            ) : (
               <>
                 <Plus className="h-4 w-4 mr-2" />
                 Agregar

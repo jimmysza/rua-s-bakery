@@ -1,7 +1,7 @@
 
-import { supabase } from '@/services/supabaseClient';
 import { ArrowLeft, ArrowRight, Cake, Lock, ShieldCheck, User } from 'lucide-react';
 import React, { useState } from 'react';
+import { supabase } from '../src/lib/supabase';
 
 interface AdminLoginProps {
   onLogin: () => void;

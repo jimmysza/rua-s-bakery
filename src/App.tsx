@@ -123,12 +123,7 @@ const App: React.FC = () => {
     const existingInCart = cart.find(item => item.product.id === product.id);
     const currentQty = existingInCart ? existingInCart.quantity : 0;
 
-    if (product.stock <= 0 || currentQty >= product.stock) {
-      setToastMessage({ type: 'error', text: 'Stock insuficiente' });
-      setShowAddedToast(true);
-      setTimeout(() => setShowAddedToast(false), 2000);
-      return;
-    }
+
 
     setCart(prev => {
       const existing = prev.find(item => item.product.id === product.id);
@@ -149,7 +144,16 @@ const App: React.FC = () => {
     setCart(prev => prev.map(item => {
       if (item.product.id === id) {
         const newQty = item.quantity + delta;
-        const validatedQty = Math.max(1, Math.min(newQty, item.product.stock));
+
+        let validatedQty;
+        // Si el producto no tiene stock (es por encargo), permitimos aumentar libremente (ej. hasta 1000)
+        // Si tiene stock, respetamos el límite del stock disponible
+        if (item.product.stock <= 0) {
+          validatedQty = Math.max(1, newQty);
+        } else {
+          validatedQty = Math.max(1, Math.min(newQty, item.product.stock));
+        }
+
         return { ...item, quantity: validatedQty };
       }
       return item;
@@ -164,10 +168,10 @@ const App: React.FC = () => {
     setCustomer(null);
     localStorage.removeItem('pastry_customer_session');
     setIsAdminLoggedIn(true);
-    
+
     localStorage.setItem('pastry_admin_session', 'active');
     setView('admin');
-  }; 
+  };
 
   const handleCustomerAuthSuccess = (user: CustomerUser) => {
     setIsAdminLoggedIn(false);
@@ -232,7 +236,7 @@ const App: React.FC = () => {
       />
 
       {showAddedToast && (
-        <div className={`fixed bottom-10 left-1/2 -translate-x-1/2 z-[100] ${toastMessage.type === 'error' ? 'bg-red-600' : 'bg-accent'} text-white px-6 py-4 rounded-[2rem] flex items-center shadow-2xl backdrop-blur-md animate-bounce`}>
+        <div className={`fixed top-10 left-1/2 -translate-x-1/2 z-[100] ${toastMessage.type === 'error' ? 'bg-red-600' : 'bg-accent'} text-white px-6 py-4 rounded-[2rem] flex items-center shadow-2xl backdrop-blur-md animate-bounce`}>
           {toastMessage.type === 'error' ? <AlertTriangle className="h-6 w-6 mr-3" /> : <CheckCircle2 className="h-6 w-6 text-green-400 mr-3" />}
           <span className="font-bold">{toastMessage.text}</span>
         </div>

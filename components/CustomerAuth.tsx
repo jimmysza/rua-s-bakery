@@ -1,6 +1,6 @@
 
 import { supabase } from '@/services/supabaseClient';
-import { ArrowRight, Cake, Loader2, Lock, MapPin, Phone, User, X } from 'lucide-react';
+import { ArrowRight, Cake, Eye, EyeOff, Loader2, Lock, MapPin, Phone, User, X } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';
 import { AddressSuggestion, searchAddresses } from '../services/geminiService';
 import { CustomerUser } from '../types';
@@ -13,6 +13,7 @@ interface CustomerAuthProps {
 
 const CustomerAuth: React.FC<CustomerAuthProps> = ({ isOpen, onClose, onAuthSuccess }) => {
   const [isLogin, setIsLogin] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -241,7 +242,9 @@ const CustomerAuth: React.FC<CustomerAuthProps> = ({ isOpen, onClose, onAuthSucc
               <User className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-300" />
               <input
                 type="text"
-                placeholder="Usuario"
+                placeholder="Correo electrónico"
+                autoComplete="email"
+                name="email"
                 required
                 className="w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-2 focus:ring-pink-300 outline-none text-sm transition-all text-gray-900"
                 value={formData.username}
@@ -252,13 +255,20 @@ const CustomerAuth: React.FC<CustomerAuthProps> = ({ isOpen, onClose, onAuthSucc
             <div className="relative">
               <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-300" />
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 placeholder="Contraseña"
                 required
-                className="w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-2 focus:ring-pink-300 outline-none text-sm transition-all text-gray-900"
+                className="w-full pl-12 pr-12 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-2 focus:ring-pink-300 outline-none text-sm transition-all text-gray-900"
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
               />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-pink-500 transition-colors"
+              >
+                {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+              </button>
             </div>
 
             {error && (
