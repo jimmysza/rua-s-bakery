@@ -181,6 +181,8 @@ const CustomerAuth: React.FC<CustomerAuthProps> = ({ isOpen, onClose, onAuthSucc
                   <input
                     type="text"
                     placeholder="Nombre"
+                    name="fullName"
+                    autoComplete="name"
                     required
                     className="w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-2 focus:ring-pink-300 outline-none text-sm transition-all text-gray-900"
                     value={formData.name}
@@ -193,6 +195,8 @@ const CustomerAuth: React.FC<CustomerAuthProps> = ({ isOpen, onClose, onAuthSucc
                     type="tel"
                     placeholder="Teléfono"
                     required
+                    autoComplete="tel"
+                    name="telefono"
                     className="w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-2 focus:ring-pink-300 outline-none text-sm transition-all text-gray-900"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
@@ -204,7 +208,8 @@ const CustomerAuth: React.FC<CustomerAuthProps> = ({ isOpen, onClose, onAuthSucc
                     type="text"
                     placeholder="Dirección"
                     required
-                    autoComplete="off"
+                    autoComplete="street-address"
+                    name="address"
                     className="w-full pl-12 pr-12 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-2 focus:ring-pink-300 outline-none text-sm transition-all text-gray-900"
                     value={formData.address}
                     onFocus={() => setShowSuggestions(true)}

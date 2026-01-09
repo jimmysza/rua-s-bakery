@@ -54,7 +54,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onShowD
       </div>
 
       <div className="p-5 flex-grow flex flex-col">
+        
         <div className="flex justify-between items-start mb-1">
+
           <div className="text-xs font-semibold text-primary uppercase tracking-widest">
             {product.category}
           </div>
@@ -65,6 +67,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onShowD
         <h3 className="text-xl font-bold text-gray-800 mb-2 group-hover:text-primary transition-colors">
           {product.name}
         </h3>
+
         <p className="text-gray-500 text-sm mb-4 flex-grow line-clamp-2 italic">
           "{product.description}"
         </p>

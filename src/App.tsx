@@ -106,7 +106,9 @@ const App: React.FC = () => {
     return products.filter(p => {
       const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         p.description.toLowerCase().includes(searchQuery.toLowerCase());
+
       const matchesCategory = activeCategory === 'Todos' || p.category === activeCategory;
+
       const isVisible = p.isVisible || currentView === 'admin';
       return matchesSearch && matchesCategory && isVisible;
     });
@@ -162,9 +164,10 @@ const App: React.FC = () => {
     setCustomer(null);
     localStorage.removeItem('pastry_customer_session');
     setIsAdminLoggedIn(true);
+    
     localStorage.setItem('pastry_admin_session', 'active');
     setView('admin');
-  };
+  }; 
 
   const handleCustomerAuthSuccess = (user: CustomerUser) => {
     setIsAdminLoggedIn(false);
