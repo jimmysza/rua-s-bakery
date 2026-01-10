@@ -1,8 +1,8 @@
 
-import { supabase } from '@/services/supabaseClient';
 import { ArrowRight, Cake, Eye, EyeOff, Loader2, Lock, MapPin, Phone, User, X } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';
 import { AddressSuggestion, searchAddresses } from '../services/geminiService';
+import { supabase } from '../src/lib/supabase';
 import { CustomerUser } from '../types';
 
 interface CustomerAuthProps {
@@ -66,15 +66,20 @@ const CustomerAuth: React.FC<CustomerAuthProps> = ({ isOpen, onClose, onAuthSucc
 
     if (isLogin) {
       const { data, error } = await supabase.auth.signInWithPassword({
-        email: formData.username, // Using username field as email
+        email: formData.username,
         password: formData.password,
       });
 
       if (error) {
-        setError(error.message);
-      } else if (data.user) {
-        // Create a customer user object or fetch profile
-        const metadata = data.user.user_metadata || {};
+        if (error.message.includes('Email not confirmed')) {
+          setError('Por favor confirma tu correo electrónico antes de ingresar.');
+        } else if (error.message.includes('Invalid login credentials')) {
+          setError('Credenciales inválidas. Verifica tu correo y contraseña o si has confirmado tu email.');
+        } else {
+          setError(error.message);
+        }
+      } else if (data.session) { // Check for session
+        const metadata = data.user?.user_metadata || {};
         const user: CustomerUser = {
           id: data.user.id,
           name: metadata.name || data.user.email?.split('@')[0] || 'User',
@@ -103,16 +108,22 @@ const CustomerAuth: React.FC<CustomerAuthProps> = ({ isOpen, onClose, onAuthSucc
       if (error) {
         setError(error.message);
       } else if (data.user) {
-        const user: CustomerUser = {
-          id: data.user.id,
-          name: formData.name,
-          phone: formData.phone,
-          address: formData.address,
-          username: formData.username,
-          lat: 11.0041, lng: -74.8070 // Default
-        };
-        onAuthSuccess(user);
-        onClose();
+        if (!data.session) {
+          setError('¡Registro exitoso! Por favor revisa tu correo para confirmar tu cuenta antes de iniciar sesión.');
+          // No cerramos el modal ni logueamos automáticamente si falta confirmación
+          setIsLogin(true); // Switch to login view so they can try after confirming
+        } else {
+          const user: CustomerUser = {
+            id: data.user.id,
+            name: formData.name,
+            phone: formData.phone,
+            address: formData.address,
+            username: formData.username,
+            lat: 11.0041, lng: -74.8070
+          };
+          onAuthSuccess(user);
+          onClose();
+        }
       }
     }
   };

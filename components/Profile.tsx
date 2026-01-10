@@ -1,7 +1,7 @@
 
-import { supabase } from '@/services/supabaseClient';
 import { ChevronRight, Heart, LogOut, MapPin, Phone, Save, Trash2, User } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
+import { supabase } from '../src/lib/supabase';
 import { CustomerUser } from '../types';
 
 interface ProfileProps {

@@ -1,8 +1,8 @@
 
-import { supabase } from '@/services/supabaseClient';
 import { ChefHat, Edit2, Eye, EyeOff, Layers, Plus, Sparkles, Trash2, X } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import { generateCatchyDescription } from '../services/geminiService';
+import { supabase } from '../src/lib/supabase';
 import { Product } from '../types';
 
 
