@@ -32,12 +32,10 @@ const Navbar: React.FC<NavbarProps> = ({
             className="flex items-center cursor-pointer group" 
             onClick={() => setView('shop')}
           >
-            <div className="p-2 bg-primary-light rounded-2xl group-hover:bg-primary transition-all duration-300">
-              <Cake className="h-7 w-7 text-primary group-hover:text-white" />
+            <div className="">
+              
+              <img  className="h-15 w-16 rounded-full" src="logo.jpg" alt="" />
             </div>
-            <span className="ml-3 text-2xl font-bold font-serif text-gray-800 tracking-tight">
-              Rua’s <span className="text-primary">Bakery</span>
-            </span>
           </div>
 
           <div className="flex items-center space-x-2 md:space-x-6">
