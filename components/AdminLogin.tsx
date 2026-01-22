@@ -17,6 +17,7 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin, onBack }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError('');
     const { data, error } = await supabase.auth.signInWithPassword({
       email: username,
       password: password,
@@ -24,7 +25,12 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin, onBack }) => {
 
     if (error) {
       setError(error.message);
-    } else if (data.user?.email !== 'nathalievalencia@uninorte.edu.co') {
+      return;
+    }
+
+    const admins = ['nathalievalencia@uninorte.edu.co'];
+
+    if (!admins.includes(data.user?.email || '')) {
       setError('Acceso denegado: No tienes permisos de administrador.');
       await supabase.auth.signOut();
     } else {
@@ -85,16 +91,16 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin, onBack }) => {
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
-              <label className="text-xs font-bold text-gray-400 uppercase tracking-tighter ml-1">Usuario Admin</label>
+              <label className="text-xs font-bold text-gray-400 uppercase tracking-tighter ml-1">Correo de Administrador</label>
               <div className="relative">
                 <User className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-300" />
                 <input
-                  type="text"
+                  type="email"
                   autoComplete="email"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   className="w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-2 focus:ring-pink-300 outline-none text-sm transition-all font-medium text-gray-900"
-                  placeholder="admin"
+                  placeholder="admin@ejemplo.com"
                   required
                 />
               </div>

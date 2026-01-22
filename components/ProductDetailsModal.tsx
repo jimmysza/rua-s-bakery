@@ -130,7 +130,7 @@ const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ product, isOp
               <Info className="h-4 w-4 mr-2 text-primary" />
               <span>Stock disponible:</span>
             </div>
-            <span className={`font-bold text-sm md:text-base ${product.stock > 0 ? 'text-green-600' : 'text-orange-500'}`}>
+            <span className={`font-bold text-sm md:text-base ${product.stock > 0 ? 'text-green-600' : 'text-[#4c9058]'}`}>
               {product.stock > 0 ? `${product.stock} unidades` : 'Para Ordenar (Sobre Pedido)'}
             </span>
           </div>

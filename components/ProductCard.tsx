@@ -18,7 +18,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onShowD
     <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group border border-gray-100 flex flex-col h-full relative">
       {isOutOfStock && (
         <div className="absolute top-4 left-4 z-10">
-          <span className="bg-orange-500 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-tighter shadow-md">
+          <span className="bg-[#4c9058] text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-tighter shadow-md">
             para Ordenar
           </span>
         </div>
@@ -77,7 +77,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onShowD
           <button
             onClick={() => onAddToCart(product)}
             className={`flex-grow flex items-center justify-center py-3 font-semibold rounded-xl transition-all duration-300 border ${isOutOfStock
-              ? 'bg-orange-500 text-white hover:bg-orange-600 border-orange-500 shadow-md'
+              ? 'bg-[#4c9058] text-white hover:bg-[#4c9058] border-[#4c9058] shadow-md'
               : 'bg-primary-light text-primary hover:bg-primary hover:text-white border-primary-light shadow-sm'
               }`}
           >

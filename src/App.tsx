@@ -1,21 +1,25 @@
 
-import { AlertTriangle, ArrowRight, Cake, CheckCircle2, Layers, Search, Sparkles } from 'lucide-react';
+import { AlertTriangle, ArrowRight, Cake, CheckCircle2, Layers, Search } from 'lucide-react';
 import React, { useEffect, useMemo, useState } from 'react';
 import AdminDashboard from '../components/AdminDashboard';
 import AdminLogin from '../components/AdminLogin';
 import Cart from '../components/Cart';
 import Contact from '../components/Contact';
 import CustomerAuth from '../components/CustomerAuth';
-import HowIWorkCarousel from '../components/HowIWorkCarousel';
+import FAQ from '../components/FAQ';
+
 import Navbar from '../components/Navbar';
 import ProductCard from '../components/ProductCard';
 import ProductDetailsModal from '../components/ProductDetailsModal';
 import Profile from '../components/Profile';
-import Testimonials from '../components/Testimonials';
 /* import { supabase } from '@/services/supabaseClient'; */ // This comment is already there, I should use the real import.
+import CustomServices from '@/components/CustomService';
+import HeroCarousel from '@/components/HeroCarousel';
+import { Facebook, Instagram, Twitter } from 'lucide-react';
 import { CartItem, CustomerUser, Product, View } from '../lib/types';
 import { supabase } from './lib/supabase';
 
+/* Heart, Search, Cake, CheckCircle2, AlertTriangle, ArrowRight, Layers,  */
 export const STORE_LOCATION = {
   lat: 11.0041,
   lng: -74.8070,
@@ -213,6 +217,10 @@ const App: React.FC = () => {
     }
   };
 
+  const scrollToCatalog = () => {
+    document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
 
   const handleCustomerUpdate = (updatedUser: CustomerUser) => {
     setCustomer(updatedUser);
@@ -245,36 +253,12 @@ const App: React.FC = () => {
       <main className="flex-grow" >
 
         {currentView === 'shop' && (
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div className="relative rounded-[3rem] overflow-hidden mb-16 h-[500px] flex items-center shadow-2xl">
-              <img
-                src="https://images.unsplash.com/photo-1481391243133-f96216dcb5d2?auto=format&fit=crop&q=80&w=1200"
-                alt="Hero"
-                className="absolute inset-0 w-full h-full object-cover brightness-[0.4]"
-              />
-              <div className="relative z-10 px-8 md:px-20 max-w-2xl text-white text-center md:text-left">
-                <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-primary/30 backdrop-blur-md text-xs font-bold mb-6 border border-primary/40 uppercase tracking-widest">
-                  <Sparkles className="h-4 w-4 mr-2 text-yellow-300" />
-                  Repostería de Autor
-                </span>
-                <h1 className="text-5xl md:text-8xl font-bold font-serif mb-6 leading-tight">
-                  Rua’s <span className="text-primary-light italic underline decoration-primary-light/30 underline-offset-8">Bakery</span>.
-                </h1>
-                <p className="text-lg md:text-xl text-gray-200 mb-8 italic leading-relaxed opacity-90">
-                  Dulces momentos horneados con alma y los mejores ingredientes artesanales.
-                </p>
-                <div className="flex flex-wrap gap-4 justify-center md:justify-start">
-                  <button onClick={() => document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' })} className="px-10 py-5 bg-primary text-white rounded-[2rem] font-bold hover:bg-primary-dark transition-all transform hover:-translate-y-1 shadow-lg">
-                    Ver Menú
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <HowIWorkCarousel />
+          <div className="">
 
 
-            <div id="catalog" className="flex flex-col md:flex-row md:items-center justify-between mb-12 gap-8 bg-white p-8 rounded-[2.5rem] shadow-sm border border-gray-100">
+            <HeroCarousel />
+
+            <div id="catalog" className="flex flex-col md:flex-row md:items-center justify-between mb-12 gap-8 bg-white rounded-[2.5rem] shadow-sm border border-gray-100 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 mt-16 mb-16">
               <div className="flex items-center space-x-2 overflow-x-auto pb-4 md:pb-0 scrollbar-hide">
                 {categories.map(cat => (
                   <button
@@ -301,7 +285,7 @@ const App: React.FC = () => {
 
             {displayedProducts.length > 0 ? (
               <div className="space-y-16" >
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-10  mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-20">
                   {displayedProducts.map((product) => (
                     <ProductCard key={product.id} product={product} onAddToCart={handleAddToCart} onShowDetails={handleShowDetails} />
                   ))}
@@ -328,26 +312,37 @@ const App: React.FC = () => {
           </div>
         )}
 
+        {currentView === 'shop' && <CustomServices />}
+
+
         {currentView === 'contact' && <Contact />}
         {currentView === 'profile' && customer && <Profile customer={customer} onLogout={handleLogout} onBackToShop={() => setView('shop')} onUpdateProfile={handleCustomerUpdate} />}
         {currentView === 'login' && !isAdminLoggedIn && <AdminLogin onLogin={handleAdminLoginSuccess} onBack={() => setView('shop')} />}
         {currentView === 'admin' && isAdminLoggedIn && <AdminDashboard products={products} onAddProduct={addProduct} onUpdateProduct={updateProduct} onDeleteProduct={deleteProduct} />}
       </main>
-      {currentView == "shop" && (<Testimonials />)}
+      {currentView == "shop" && (<FAQ />)}
 
-      <footer className="bg-white border-t border-primary-light pt-20 pb-10">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-            <div className="col-span-1 md:col-span-2">
-              <div className="flex items-center mb-6">
-                <Cake className="h-8 w-8 text-primary" />
-                <span className="ml-3 text-3xl font-bold font-serif text-gray-800">Rua’s Bakery</span>
+      <footer className="relative bg-primary text-white pt-24 pb-12 overflow-hidden">
+        <div className="absolute inset-0 z-0 opacity-10 pointer-events-none">
+          <img src="galletasFooter.jpg" alt="Bakery background" className="w-full h-full object-cover" />
+        </div>
+
+        <div className="max-w-6xl mx-auto px-6 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 text-center">
+            <div className="space-y-4">
+              <h3 className="font-serif italic text-5xl mb-6">Ciudad Mallorquin</h3>
+              <div className="text-sm tracking-wide space-y-2 uppercase opacity-90">
+                <a href="tel:+573045852792">(+57) 304 585-2792</a>
+                <p>Calle Principal, Local 4</p>
+                <p>Puerto Colombia, ATL 081007</p>
+                <p className="font-bold">nathalievalencia@uninorte.edu.co</p>
               </div>
-              <p className="text-gray-500 max-w-sm italic text-sm mb-6">Artesanía en cada bocado, preparada con amor en Ciudad Mallorquín.</p>
             </div>
-            <div>
-              <h4 className="font-bold text-gray-800 mb-6 uppercase text-xs tracking-[0.2em]">Navegación</h4>
-              <ul className="space-y-4 text-gray-500 text-sm">
+
+            <div className="space-y-6">
+              <h3 className="font-serif italic text-5xl mb-6">Navegacion</h3>
+
+              <ul className="text-sm tracking-widest space-y-3 uppercase opacity-90 font-medium">
                 <li>
                   <button
                     onClick={() => {
@@ -356,24 +351,38 @@ const App: React.FC = () => {
                         document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' });
                       }, 0);
                     }}
-                    className="hover:text-primary"
+                    className="hover:text-gray-600"
                   >
                     Tienda
                   </button>
                 </li>
-                <li><button onClick={() => { setView('contact'); window.scrollTo(0, 0); }} className="hover:text-primary">Contacto</button></li>
-                {!isAdminLoggedIn && <li><button onClick={() => { setView('login'); window.scrollTo(0, 0); }} className="hover:text-primary transition-colors">Administración</button></li>}
+                <li><button onClick={() => { setView('contact'); window.scrollTo(0, 0); }} className="hover:text-gray-600">Contacto</button></li>
+                {!isAdminLoggedIn && <li><button onClick={() => { setView('login'); window.scrollTo(0, 0); }} className="hover:text-gray-600 transition-colors">Administración</button></li>}
               </ul>
             </div>
-            <div>
-              <h4 className="font-bold text-gray-800 mb-6 uppercase text-xs tracking-[0.2em]">Ubicación</h4>
-              <p className="text-gray-500 italic text-sm">{STORE_LOCATION.address}</p>
-              <p className="text-gray-500 italic text-sm mt-4" >+57 304 5852792</p>
-              <p className="text-gray-500 italic text-sm mt-4">hola@ruasbakery.com</p>
+
+            <div className="space-y-4">
+              <h3 className="font-serif italic text-5xl mb-6">Horarios</h3>
+              <div className="text-sm tracking-widest space-y-3 uppercase opacity-90 font-medium">
+                <p>LUN - JUE: 8:00 AM - 7:00 PM</p>
+                <p>VIE - SAB: 8:00 AM - 10:00 PM</p>
+                <p>DOMINGO: 9:00 AM - 2:00 PM</p>
+              </div>
             </div>
+
+
           </div>
-          <div className="text-center text-gray-400 text-xs font-bold uppercase tracking-widest pt-8 border-t border-gray-100">
-            &copy; {new Date().getFullYear()} Rua’s Bakery.
+
+          <div className="flex justify-center space-x-8 mt-20">
+            {[<Facebook className="h-5 w-5" />, <Twitter className="h-5 w-5" />, <Instagram className="h-5 w-5" />].map((icon, i) => (
+              <a key={i} href="#" className="w-12 h-12 bg-[#FFF] rotate-45 flex items-center justify-center text-black hover:bg-white hover:text-[#D9B44A] transition-all transform hover:scale-110 shadow-lg">
+                <div className="-rotate-45">{icon}</div>
+              </a>
+            ))}
+          </div>
+
+          <div className="mt-20 pt-8 border-t border-white/10 text-center">
+            <p className="text-3xl font-serif italic opacity-30 tracking-widest uppercase">&copy; {new Date().getFullYear()} Rua’s Bakery. </p>
           </div>
         </div>
       </footer>
