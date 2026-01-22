@@ -257,6 +257,17 @@ const App: React.FC = () => {
 
 
             <HeroCarousel />
+            <div className="relative text-center w-full py-10 mt-16">
+              <h1 className="text-4xl md:text-6xl font-bold font-serif mb-6 leading-tight">
+                Disfruta los mejores 
+                <span className="block text-primary">postres en Barranquilla</span>
+              </h1>
+
+              <p className="text-gray-600 text-lg md:text-xl max-w-2xl mx-auto">
+                Descubre sabores únicos, pastelerías locales y experiencias dulces que te van a enamorar.
+              </p>
+            </div>
+
 
             <div id="catalog" className="flex flex-col md:flex-row md:items-center justify-between mb-12 gap-8 bg-white rounded-[2.5rem] shadow-sm border border-gray-100 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 mt-16 mb-16">
               <div className="flex items-center space-x-2 overflow-x-auto pb-4 md:pb-0 scrollbar-hide">

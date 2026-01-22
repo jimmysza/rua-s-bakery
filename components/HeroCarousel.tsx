@@ -1,6 +1,6 @@
 
-import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Sparkles, ShoppingBag } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ShoppingBag, Sparkles } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
 
 const slides = [
   {
@@ -41,9 +41,8 @@ const HeroCarousel: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
       {slides.map((slide, index) => (
         <div
           key={index}
-          className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-            index === current ? 'opacity-100' : 'opacity-0'
-          }`}
+          className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === current ? 'opacity-100' : 'opacity-0'
+            }`}
         >
           <img
             src={slide.image}
@@ -56,13 +55,13 @@ const HeroCarousel: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
                 <Sparkles className="h-4 w-4 mr-2 text-yellow-400" />
                 {slide.tag}
               </div>
-              <h1 className="text-5xl md:text-7xl font-bold font-serif text-white mb-8 leading-tight">
+              <h2 className="text-5xl md:text-7xl font-bold font-serif text-white mb-8 leading-tight">
                 {slide.title}
-              </h1>
+              </h2>
               <p className="text-2xl md:text-2xl text-gray-100 mb-12 italic font-light max-w-2xl mx-auto leading-relaxed">
                 "{slide.subtitle}"
               </p>
-              <button 
+              <button
                 onClick={onExplore}
                 className="inline-flex items-center px-12 py-5 bg-primary text-white rounded-full font-bold hover:bg-white hover:text-primary transition-all transform hover:scale-105 shadow-2xl"
               >
@@ -88,9 +87,8 @@ const HeroCarousel: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
           <button
             key={idx}
             onClick={() => setCurrent(idx)}
-            className={`h-1 transition-all duration-500 rounded-full ${
-              idx === current ? 'w-16 bg-white' : 'w-6 bg-white/30'
-            }`}
+            className={`h-1 transition-all duration-500 rounded-full ${idx === current ? 'w-16 bg-white' : 'w-6 bg-white/30'
+              }`}
           />
         ))}
       </div>
