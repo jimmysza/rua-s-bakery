@@ -8,7 +8,7 @@ const STORE_LOCATION = {
   address: "📍| Barranquilla / Ciudad Mallorquin"
 };
 
-const WHATSAPP_NUMBER = '573045852792';
+const WHATSAPP_NUMBER = '57 3045852792';
 
 
 const Contact: React.FC = () => {
@@ -27,7 +27,7 @@ const Contact: React.FC = () => {
     const emailBody = `Hola Rua's Bakery,\n\nSoy ${formData.name}.\n\n${formData.message}\n\nMis datos de contacto:\nEmail: ${formData.email}`;
 
     // Create mailto link
-    const mailtoLink = `mailto:hola@ruasbakery.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(emailBody)}`;
+    const mailtoLink = `mailto:nathalievalencia@uninorte.edu.co?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(emailBody)}`;
 
     // Open email client
     window.location.href = mailtoLink;
@@ -54,14 +54,14 @@ const Contact: React.FC = () => {
           <div className="relative">
             <div className="aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl relative z-10">
               <img
-                src="https://images.unsplash.com/photo-1581299894007-aaa50297cf16?auto=format&fit=crop&q=80&w=800"
-                alt="Chef Valerie Rua"
+                src="natt.jpg"
+                alt="Chef Natalia Valencia"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-10">
                 <div className="text-white">
-                  <p className="text-sm font-bold uppercase tracking-widest mb-1">Fundadora & Master Chef</p>
-                  <h2 className="text-4xl font-serif font-bold">Valerie Rua</h2>
+                  <p className="text-sm font-bold uppercase tracking-widest mb-1">Fundadora & Chef</p>
+                  <h2 className="text-4xl font-serif font-bold">Natalia Valencia</h2>
                 </div>
               </div>
             </div>
@@ -81,10 +81,10 @@ const Contact: React.FC = () => {
             </h3>
             <div className="space-y-6 text-gray-600 leading-relaxed italic text-lg">
               <p>
-                "Mi viaje en la repostería comenzó en la cocina de mi abuela en Barranquilla, donde aprendí que el secreto de un buen pastel no está solo en la técnica, sino en el alma que le pones a cada mezcla."
+                "Mi viaje en la repostería comenzó en la cocina de mi abuela en Cartagena, donde aprendí que el secreto de un buen pastel no está solo en la técnica, sino en el alma que le pones a cada mezcla."
               </p>
               <p className="not-italic text-base">
-                Tras años de formación en alta pastelería internacional, Valerie regresó a su ciudad natal para fundar <strong>Rua’s Bakery</strong>. Su visión es simple: transformar ingredientes nobles y locales en piezas de arte comestibles que celebren los momentos más importantes de la vida en Ciudad Mallorquín.
+                Tras años de formación en alta pastelería internacional, Natalia regresó a su ciudad natal para fundar <strong>Rua’s Bakery</strong>. Su visión es simple: transformar ingredientes nobles y locales en piezas de arte comestibles que celebren los momentos más importantes de la vida en Barranquilla.
               </p>
             </div>
 
@@ -122,7 +122,7 @@ const Contact: React.FC = () => {
               <div className="space-y-6">
                 <div className="flex items-center space-x-4 text-gray-300">
                   <Mail className="h-5 w-5 text-primary" />
-                  <span>hola@ruasbakery.com</span>
+                  <span>nathalievalencia@uninorte.edu.co</span>
                 </div>
                 <div className="flex items-center space-x-4 text-gray-300">
                   <Instagram className="h-5 w-5 text-primary" />

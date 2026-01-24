@@ -15,7 +15,8 @@ import Profile from '../components/Profile';
 /* import { supabase } from '@/services/supabaseClient'; */ // This comment is already there, I should use the real import.
 import CustomServices from '@/components/CustomService';
 import HeroCarousel from '@/components/HeroCarousel';
-import { Facebook, Instagram, Twitter } from 'lucide-react';
+import { Facebook, Instagram } from 'lucide-react';
+import { SiTiktok } from "react-icons/si";
 import { CartItem, CustomerUser, Product, View } from '../lib/types';
 import { supabase } from './lib/supabase';
 
@@ -259,7 +260,7 @@ const App: React.FC = () => {
             <HeroCarousel />
             <div className="relative text-center w-full py-10 mt-16">
               <h1 className="text-4xl md:text-6xl font-bold font-serif mb-6 leading-tight">
-                Disfruta los mejores 
+                Disfruta los mejores
                 <span className="block text-primary">postres en Barranquilla</span>
               </h1>
 
@@ -385,7 +386,7 @@ const App: React.FC = () => {
           </div>
 
           <div className="flex justify-center space-x-8 mt-20">
-            {[<Facebook className="h-5 w-5" />, <Twitter className="h-5 w-5" />, <Instagram className="h-5 w-5" />].map((icon, i) => (
+            {[<Facebook className="h-5 w-5" />, <SiTiktok size={5} />, <Instagram className="h-5 w-5" />].map((icon, i) => (
               <a key={i} href="#" className="w-12 h-12 bg-[#FFF] rotate-45 flex items-center justify-center text-black hover:bg-white hover:text-[#D9B44A] transition-all transform hover:scale-110 shadow-lg">
                 <div className="-rotate-45">{icon}</div>
               </a>
