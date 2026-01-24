@@ -54,7 +54,7 @@ const App: React.FC = () => {
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [showAddedToast, setShowAddedToast] = useState(false);
   const [toastMessage, setToastMessage] = useState({ type: 'success', text: '' });
-  const [showAllProducts, setShowAllProducts] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(6);
 
   useEffect(() => {
     fetchProducts();
@@ -99,7 +99,7 @@ const App: React.FC = () => {
   }, [cart]);
 
   useEffect(() => {
-    setShowAllProducts(false);
+    setVisibleCount(6);
   }, [activeCategory, searchQuery]);
 
   const categories = useMemo(() => {
@@ -120,9 +120,8 @@ const App: React.FC = () => {
   }, [products, searchQuery, activeCategory, currentView]);
 
   const displayedProducts = useMemo(() => {
-    if (showAllProducts) return filteredProducts;
-    return filteredProducts.slice(0, 8);
-  }, [filteredProducts, showAllProducts]);
+    return filteredProducts.slice(0, visibleCount);
+  }, [filteredProducts, visibleCount]);
 
   const handleAddToCart = (product: Product) => {
     const existingInCart = cart.find(item => item.product.id === product.id);
@@ -296,17 +295,17 @@ const App: React.FC = () => {
             </div>
 
             {displayedProducts.length > 0 ? (
-              <div className="space-y-16" >
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-10  mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-20">
+              <div className="space-y-5" >
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-10  mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-10">
                   {displayedProducts.map((product) => (
                     <ProductCard key={product.id} product={product} onAddToCart={handleAddToCart} onShowDetails={handleShowDetails} />
                   ))}
                 </div>
-                {filteredProducts.length > 8 && !showAllProducts && (
-                  <div className="flex justify-center pt-8">
+                {filteredProducts.length > visibleCount && (
+                  <div className="flex justify-center mt-0">
                     <button
-                      onClick={() => setShowAllProducts(true)}
-                      className="group flex items-center space-x-3 px-10 py-5 bg-white border-2 border-primary-light text-primary rounded-[2rem] font-bold hover:bg-primary hover:text-white transition-all shadow-lg"
+                      onClick={() => setVisibleCount(prev => prev + 6)}
+                      className="group flex items-center space-x-3 px-10 py-5 bg-white border-2 border-primary-light text-primary rounded-[2rem] font-bold hover:bg-primary hover:text-white transition-all shadow-lg my-10"
                     >
                       <Layers className="h-5 w-5" />
                       <span>Ver más delicias</span>
