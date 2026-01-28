@@ -24,7 +24,7 @@ const CustomServices: React.FC = () => {
                         />
                         <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-primary/80 to-transparent">
                             <p className="text-white text-xs font-bold uppercase tracking-widest">Pastelera</p>
-                            <h4 className="text-white font-serif text-xl">Natalia Valencia</h4>
+                            <h4 className="text-white font-serif text-xl">Natalie Valencia</h4>
                         </div>
                     </div>
 
@@ -51,7 +51,7 @@ const CustomServices: React.FC = () => {
                     </div>
 
                     <h2 className="text-5xl md:text-6xl font-serif font-bold leading-tight">
-                        Creamos el <span className="text-primary italic">arte</span> de tu celebración.
+                        Creamos <span className="text-primary italic">Productos</span> para tus celebraciones.
                     </h2>
 
                     <p className="text-gray-400 text-lg leading-relaxed">

@@ -24,12 +24,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onShowD
         </div>
       )}
 
-      <div className="relative overflow-hidden h-60">
+      <div className="relative overflow-hidden h-[400px]">
         <img
           src={mainImage}
           alt={product.name}
           loading="lazy"
-          className={`w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500 ${isOutOfStock ? 'grayscale opacity-75' : ''}`}
+          className={`w-full h-[400px] object-cover transform group-hover:scale-110 transition-transform duration-500 ${isOutOfStock ? 'grayscale opacity-75' : ''}`}
         />
         <div className="absolute top-4 right-4">
           <span className="bg-white/90 backdrop-blur-sm text-primary font-bold px-3 py-1 rounded-full shadow-sm text-sm">

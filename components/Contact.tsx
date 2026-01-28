@@ -55,13 +55,13 @@ const Contact: React.FC = () => {
             <div className="aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl relative z-10">
               <img
                 src="natt.jpg"
-                alt="Chef Natalia Valencia"
+                alt="Chef Natalie Valencia"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-10">
                 <div className="text-white">
                   <p className="text-sm font-bold uppercase tracking-widest mb-1">Fundadora & Chef</p>
-                  <h2 className="text-4xl font-serif font-bold">Natalia Valencia</h2>
+                  <h2 className="text-4xl font-serif font-bold">Natalie Valencia</h2>
                 </div>
               </div>
             </div>
@@ -84,7 +84,7 @@ const Contact: React.FC = () => {
                 "Mi viaje en la repostería comenzó en la cocina de mi abuela en Cartagena, donde aprendí que el secreto de un buen pastel no está solo en la técnica, sino en el alma que le pones a cada mezcla."
               </p>
               <p className="not-italic text-base">
-                Tras años de formación en alta pastelería internacional, Natalia regresó a su ciudad natal para fundar <strong>Rua’s Bakery</strong>. Su visión es simple: transformar ingredientes nobles y locales en piezas de arte comestibles que celebren los momentos más importantes de la vida en Barranquilla.
+                Tras años de formación en alta pastelería internacional, Natalie regresó a su ciudad natal para fundar <strong>Rua’s Bakery</strong>. Su visión es simple: transformar ingredientes nobles y locales en piezas de arte comestibles que celebren los momentos más importantes de la vida en Barranquilla.
               </p>
             </div>
 

@@ -45,7 +45,7 @@ const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ product, isOp
             src={images[activeImgIndex]}
             alt={product.name}
             loading="lazy"
-            className="w-full h-full object-cover transition-opacity duration-500"
+            className="w-full h-full object-contain transition-opacity duration-500"
           />
 
           <button
@@ -72,10 +72,6 @@ const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ product, isOp
               </button>
             </>
           )}
-
-          <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 bg-gradient-to-t from-white via-white/60 to-transparent">
-            <h3 className="text-2xl md:text-3xl font-bold font-serif text-gray-800 leading-tight">{product.name}</h3>
-          </div>
         </div>
 
         {/* Thumbnail bar */}
@@ -101,6 +97,7 @@ const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ product, isOp
 
         {/* Content Area */}
         <div className="p-6 md:p-8 space-y-8 pb-10 md:pb-8">
+          <h3 className="text-2xl md:text-3xl font-bold font-serif text-gray-800 leading-tight">{product.name}</h3>
           <div className="flex items-start space-x-4">
             <div className="p-3 bg-primary-light rounded-2xl flex-shrink-0">
               <ChefHat className="h-6 w-6 text-primary" />

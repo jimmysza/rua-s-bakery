@@ -27,6 +27,22 @@ export const STORE_LOCATION = {
   address: "📍| Barranquilla / Ciudad Mallorquin"
 };
 
+
+const socialLinks = [
+  {
+    icon: <Facebook className="h-5 w-5" />,
+    href: "https://facebook.com/tupagina",
+  },
+  {
+    icon: <SiTiktok size={20} />,
+    href: "https://tiktok.com/@tucuenta",
+  },
+  {
+    icon: <Instagram className="h-5 w-5" />,
+    href: "https://instagram.com/tucuenta",
+  },
+];
+
 const App: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -362,13 +378,13 @@ const App: React.FC = () => {
                         document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' });
                       }, 0);
                     }}
-                    className="hover:text-gray-600"
+                    className="hover:text-amber-300"
                   >
                     Tienda
                   </button>
                 </li>
-                <li><button onClick={() => { setView('contact'); window.scrollTo(0, 0); }} className="hover:text-gray-600">Contacto</button></li>
-                {!isAdminLoggedIn && <li><button onClick={() => { setView('login'); window.scrollTo(0, 0); }} className="hover:text-gray-600 transition-colors">Administración</button></li>}
+                <li><button onClick={() => { setView('contact'); window.scrollTo(0, 0); }} className="hover:text-amber-300">Contacto</button></li>
+                {!isAdminLoggedIn && <li><button onClick={() => { setView('login'); window.scrollTo(0, 0); }} className="hover:text-amber-300 transition-colors">Administración</button></li>}
               </ul>
             </div>
 
@@ -385,12 +401,21 @@ const App: React.FC = () => {
           </div>
 
           <div className="flex justify-center space-x-8 mt-20">
-            {[<Facebook className="h-5 w-5" />, <SiTiktok size={5} />, <Instagram className="h-5 w-5" />].map((icon, i) => (
-              <a key={i} href="#" className="w-12 h-12 bg-[#FFF] rotate-45 flex items-center justify-center text-black hover:bg-white hover:text-[#D9B44A] transition-all transform hover:scale-110 shadow-lg">
-                <div className="-rotate-45">{icon}</div>
+            {socialLinks.map((item, i) => (
+              <a
+                key={i}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 bg-[#FFF] rotate-45 flex items-center justify-center text-black hover:bg-white hover:text-[#D9B44A] transition-all transform hover:scale-110 shadow-lg"
+              >
+                <div className="-rotate-45">
+                  {item.icon}
+                </div>
               </a>
             ))}
           </div>
+
 
           <div className="mt-20 pt-8 border-t border-white/10 text-center">
             <p className="text-3xl font-serif italic opacity-30 tracking-widest uppercase">&copy; {new Date().getFullYear()} Rua’s Bakery. </p>
